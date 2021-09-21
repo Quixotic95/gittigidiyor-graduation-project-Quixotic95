@@ -41,4 +41,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionLogMapper.INSTANCE.toExceptionLogDto(exceptionLog));
     }
 
+    @ExceptionHandler(CustomerAlreadyExistsWithTCKNException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<?> handleCustomerAlreadyExistsWithTCKNException(CustomerAlreadyExistsWithTCKNException e) {
+        ExceptionLog exceptionLog = new ExceptionLog(e.getMessage(), HttpStatus.CONFLICT);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ExceptionLogMapper.INSTANCE.toExceptionLogDto(exceptionLog));
+    }
+
+    @ExceptionHandler(CustomerAlreadyExistsWithPhoneNumberException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<?> handleCustomerAlreadyExistsWithPhoneNumberException(CustomerAlreadyExistsWithPhoneNumberException e) {
+        ExceptionLog exceptionLog = new ExceptionLog(e.getMessage(), HttpStatus.CONFLICT);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ExceptionLogMapper.INSTANCE.toExceptionLogDto(exceptionLog));
+    }
+
 }
