@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 
 @RestControllerAdvice
@@ -24,6 +26,23 @@ public class GlobalExceptionHandler {
 
         String errorMessage = Objects.requireNonNull(result.getFieldError()).getDefaultMessage();
         ExceptionLog exceptionLog = new ExceptionLog(errorMessage, HttpStatus.NOT_ACCEPTABLE);
+
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ExceptionLogMapper.INSTANCE.toExceptionLogDto(exceptionLog));
+
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ResponseEntity<?> handleConstraintViolationException(ConstraintViolationException e) {
+
+        String errorMessage = "";
+
+        for (ConstraintViolation violations : e.getConstraintViolations()) {
+            errorMessage = violations.getMessage();
+        }
+
+        ExceptionLog exceptionLog = new ExceptionLog(errorMessage, HttpStatus.NOT_ACCEPTABLE);
+
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ExceptionLogMapper.INSTANCE.toExceptionLogDto(exceptionLog));
 
     }

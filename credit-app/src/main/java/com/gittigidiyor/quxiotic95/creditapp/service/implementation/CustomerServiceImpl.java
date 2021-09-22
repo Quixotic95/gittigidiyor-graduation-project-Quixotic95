@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public GenericDTO<CustomerDTO> save(CustomerDTO customerDTO) {
 
-        Optional<Customer> optionalExistingCustomer = customerRepository.findCustomerByTcknAndIdIsNot(customerDTO.getTckn(), UUID.randomUUID());
+        Optional<Customer> optionalExistingCustomer = customerRepository.findCustomerByTckn(customerDTO.getTckn());
         if (optionalExistingCustomer.isPresent()) {
             throw new CustomerAlreadyExistsWithTCKNException("This TCKN already belongs to another customer in the system.");
         }
@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO update(CustomerDTO customerDTO) {
 
-        Customer existingCustomer = customerRepository.findCustomerByTcknAndIdIsNot(customerDTO.getTckn(), UUID.randomUUID())
+        Customer existingCustomer = customerRepository.findCustomerByTckn(customerDTO.getTckn())
                 .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + customerDTO.getTckn() + " couldn't found!"));
 
         if (customerRepository.findCustomerByPhoneNumberAndIdIsNot(customerDTO.getPhoneNumber(), existingCustomer.getId()).isPresent()) {
@@ -60,14 +60,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+    @Transactional
     @Override
     public CustomerDTO delete(String tckn) {
-        Customer result = new Customer();
-        result.setFirstName("Customer with tckn");
-        result.setLastName(tckn + "will be deleted");
-        result.setMonthlyIncome(200);
-        result.setPhoneNumber(";)");
-        return CustomerMapper.INSTANCE.toCustomerDto(result);
+
+        Customer existingCustomer = customerRepository.findCustomerByTckn(tckn)
+                .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + tckn + " couldn't found!"));
+
+        CustomerDTO result = CustomerMapper.INSTANCE.toCustomerDto(existingCustomer);
+        customerRepository.delete(existingCustomer);
+
+        return result;
+
     }
 
 }
