@@ -1,7 +1,7 @@
 package com.gittigidiyor.quxiotic95.creditapp.service.implementation;
 
+import com.gittigidiyor.quxiotic95.creditapp.client.CreditScoreClient;
 import com.gittigidiyor.quxiotic95.creditapp.dto.CustomerDTO;
-import com.gittigidiyor.quxiotic95.creditapp.dto.generic.GenericDTO;
 import com.gittigidiyor.quxiotic95.creditapp.entity.Customer;
 import com.gittigidiyor.quxiotic95.creditapp.exception.CustomerAlreadyExistsWithPhoneNumberException;
 import com.gittigidiyor.quxiotic95.creditapp.exception.CustomerAlreadyExistsWithTCKNException;
@@ -22,10 +22,10 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CreditScoreClient creditScoreClient;
 
     @Transactional
-    @Override
-    public GenericDTO<CustomerDTO> save(CustomerDTO customerDTO) {
+    public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
 
         Optional<Customer> optionalExistingCustomer = customerRepository.findCustomerByTckn(customerDTO.getTckn());
         if (optionalExistingCustomer.isPresent()) {
@@ -37,14 +37,22 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerAlreadyExistsWithPhoneNumberException("This phone number already belongs to another customer in the system.");
         }
 
+        creditScoreClient.generateCreditScore(customerDTO.getTckn());
         Customer result = CustomerMapper.INSTANCE.toCustomerEntity(customerDTO);
+
         return CustomerMapper.INSTANCE.toCustomerDto(customerRepository.save(result));
 
     }
 
+    @Override
+    public CustomerDTO findCustomerByTckn(String tckn) {
+        return CustomerMapper.INSTANCE.toCustomerDto(customerRepository.findCustomerByTckn(tckn)
+                .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + tckn + " couldn't found!")));
+    }
+
     @Transactional
     @Override
-    public CustomerDTO update(CustomerDTO customerDTO) {
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
 
         Customer existingCustomer = customerRepository.findCustomerByTckn(customerDTO.getTckn())
                 .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + customerDTO.getTckn() + " couldn't found!"));
@@ -55,6 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer result = CustomerMapper.INSTANCE.toCustomerEntity(customerDTO);
         result.setId(existingCustomer.getId());
+        result.setUpdated(true);
 
         return CustomerMapper.INSTANCE.toCustomerDto(customerRepository.save(result));
 
@@ -62,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     @Override
-    public CustomerDTO delete(String tckn) {
+    public CustomerDTO deleteCustomer(String tckn) {
 
         Customer existingCustomer = customerRepository.findCustomerByTckn(tckn)
                 .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + tckn + " couldn't found!"));

@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity {
+public abstract class BaseEntityWithUUID {
 
     @Id
     @GeneratedValue

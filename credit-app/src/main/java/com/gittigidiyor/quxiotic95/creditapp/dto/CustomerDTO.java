@@ -1,6 +1,5 @@
 package com.gittigidiyor.quxiotic95.creditapp.dto;
 
-import com.gittigidiyor.quxiotic95.creditapp.dto.generic.GenericDTO;
 import com.gittigidiyor.quxiotic95.creditapp.validation.TCKNConstraint;
 import com.gittigidiyor.quxiotic95.creditapp.validation.group.FirstCheck;
 import com.gittigidiyor.quxiotic95.creditapp.validation.group.SecondCheck;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
-public class CustomerDTO implements GenericDTO<CustomerDTO> {
+public class CustomerDTO {
 
     @ApiModelProperty(example = "A. Emre", value = "First name of the customer.")
     @NotBlank(message = "First name is required!")

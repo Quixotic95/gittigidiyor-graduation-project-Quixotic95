@@ -3,11 +3,14 @@ package com.gittigidiyor.quxiotic95.creditapp.service;
 import com.gittigidiyor.quxiotic95.creditapp.dto.CustomerDTO;
 import com.gittigidiyor.quxiotic95.creditapp.service.generic.GenericService;
 
-@SuppressWarnings("unused")
 public interface CustomerService extends GenericService<CustomerDTO> {
 
-    CustomerDTO update(CustomerDTO customerDTO);
+    CustomerDTO findCustomerByTckn(String tckn);
 
-    CustomerDTO delete(String tckn);
+    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+
+    CustomerDTO deleteCustomer(String tckn);
+
+    CustomerDTO saveCustomer(CustomerDTO customerDTO);
 
 }

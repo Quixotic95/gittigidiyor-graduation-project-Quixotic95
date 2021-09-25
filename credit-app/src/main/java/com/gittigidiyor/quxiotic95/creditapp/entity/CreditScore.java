@@ -12,20 +12,11 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Customer extends BaseEntityWithUUID {
-
-    private String firstName;
-
-    private String lastName;
-
-    private double monthlyIncome;
-
-    @EqualsAndHashCode.Include
-    private String phoneNumber;
+public class CreditScore extends BaseEntityWithLongId {
 
     @EqualsAndHashCode.Include
     private String tckn;
 
-    private boolean isUpdated = true;
+    private double creditScore;
 
 }
