@@ -23,6 +23,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 
+@SuppressWarnings("CommentedOutCode")
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
@@ -45,7 +46,7 @@ public class GlobalExceptionHandler {
 
         String errorMessage = "";
 
-        for (ConstraintViolation violations : e.getConstraintViolations()) {
+        for (ConstraintViolation<?> violations : e.getConstraintViolations()) {
             errorMessage = violations.getMessage();
         }
 

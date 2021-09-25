@@ -2,9 +2,9 @@ package com.gittigidiyor.quxiotic95.creditapp.utility;
 
 public class LoanLimitCalculator {
 
-    private static double CREDIT_LIMIT_MULTIPLIER = 4;
-    private static double LOWER_CREDIT_SCORE_FOR_DENY = 500;
-    private static double UPPER_CREDIT_SCORE_FOR_CALCULATION = 1000;
+    private static final double CREDIT_LIMIT_MULTIPLIER = 4;
+    private static final double LOWER_CREDIT_SCORE_FOR_DENY = 500;
+    private static final double UPPER_CREDIT_SCORE_FOR_CALCULATION = 1000;
 
     public static double calculateLoanLimit(double monthlyIncome, double creditScore) {
         if (creditScore < LOWER_CREDIT_SCORE_FOR_DENY) {
