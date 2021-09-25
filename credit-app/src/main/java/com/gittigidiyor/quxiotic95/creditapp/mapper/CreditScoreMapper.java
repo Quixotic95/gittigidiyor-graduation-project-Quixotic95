@@ -10,8 +10,6 @@ public interface CreditScoreMapper {
 
     CreditScoreMapper INSTANCE = Mappers.getMapper(CreditScoreMapper.class);
 
-    CreditScore toCreditScoreEntity(CreditScoreDTO creditScoreDTO);
-
     CreditScoreDTO toCreditScoreDto(CreditScore creditScore);
 
 }
