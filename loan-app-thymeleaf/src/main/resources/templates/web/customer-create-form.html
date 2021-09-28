@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org/">
+<head>
+
+    <title>Save Customer Form</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width,
+          initial-scale=1,
+          shrink-to-fit=no"/>
+
+    <!-- Reference Bootstrap files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Customer Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Customer</p>
+
+    <form action="#" th:action="@{/customers/add}"
+          th:object="${customer}" method="POST">
+
+        <!-- Add a hidden form field to handle the update -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <label for="tckn">TCKN</label>
+        <input type="number" th:field="*{tckn}" class="form-control mb-4 col-4" placeholder="23570297588" id="tckn"/>
+        <p th:if="${#fields.hasErrors('tckn')}" th:errorclass="error" th:errors="*{tckn}"
+           class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
+           style="font-size:60%;"></p>
+
+        <label for="firstName">First Name</label>
+        <input type="text" th:field="*{firstName}"
+               class="form-control mb-4 col-4" placeholder="A. Emre" id="firstName"/>
+        <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"
+           class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
+           style="font-size:60%;"></p>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" th:field="*{lastName}"
+               class="form-control mb-4 col-4" placeholder="OĞUZ" id="lastName"/>
+        <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"
+           class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
+           style="font-size:60%;"></p>
+
+        <label for="monthlyIncome">Monthly Income</label>
+        <input type="number" step="any" th:field="*{monthlyIncome}"
+               class="form-control mb-4 col-4" placeholder="7000" id="monthlyIncome"/>
+        <p th:if="${#fields.hasErrors('monthlyIncome')}" th:errorclass="error" th:errors="*{monthlyIncome}"
+           class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
+           style="font-size:60%;"></p>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input type="number" th:field="*{phoneNumber}"
+               class="form-control mb-4 col-4" placeholder="05413711566" id="phoneNumber"/>
+        <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"
+           class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
+           style="font-size:60%;"></p>
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+
+    <hr>
+    <a th:href="@{/customers/list}">Back to Customers List</a>
+
+</div>
+
+</body>
+</html>
