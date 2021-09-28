@@ -23,7 +23,7 @@
 
     <groupId>com.gittigidiyor.Quixotic95</groupId>
     <artifactId>loan-app-thymeleaf</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>loan-app-thymeleaf</name>
     <description>loan-app-thymeleaf</description>
 

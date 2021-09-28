@@ -18,4 +18,7 @@ public interface LoanApplicationClient {
     @GetMapping("{tckn}")
     ResponseEntity<List<LoanApplicationResult>> getCustomerLoanApplicationResults(@PathVariable(name = "tckn") String tckn);
 
+    @GetMapping("getLast/{tckn}")
+    ResponseEntity<LoanApplicationResult> getLastLoanApplicationResultOfCustomerByTckn(@PathVariable(name = "tckn") String tckn);
+
 }

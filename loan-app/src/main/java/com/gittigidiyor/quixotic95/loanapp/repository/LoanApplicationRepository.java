@@ -12,4 +12,6 @@ public interface LoanApplicationRepository extends JpaRepository<LoanApplication
 
     Optional<List<LoanApplicationResult>> findLoanApplicationResultsByCustomerTckn(String tckn);
 
+    Optional<LoanApplicationResult> findTopLoanApplicationResultByCustomerTcknOrderByCreatedDateDesc(String tckn);
+
 }

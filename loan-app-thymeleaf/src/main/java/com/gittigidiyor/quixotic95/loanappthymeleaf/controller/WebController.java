@@ -4,6 +4,7 @@ package com.gittigidiyor.quixotic95.loanappthymeleaf.controller;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.client.CreditScoreClient;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.client.CustomerClient;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.client.LoanApplicationClient;
+import com.gittigidiyor.quixotic95.loanappthymeleaf.client.SmsClient;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.model.Customer;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.model.LoanApplicationResult;
 import com.gittigidiyor.quixotic95.loanappthymeleaf.model.TcknModel;
@@ -27,6 +28,7 @@ public class WebController {
     private final CustomerClient customerClient;
     private final CreditScoreClient creditScoreClient;
     private final LoanApplicationClient loanApplicationClient;
+    private final SmsClient smsClient;
 
     @GetMapping("/list")
     public String listCustomers(Model model) {
@@ -110,9 +112,11 @@ public class WebController {
 
         Customer customer = customerClient.findCustomerByTckn(tcknModel.getTckn()).getBody();
 
-        redirectAttributes.addAttribute("customerId", customer.getId());
+        LoanApplicationResult loanApplicationResult = loanApplicationClient.getLastLoanApplicationResultOfCustomerByTckn(tcknModel.getTckn()).getBody();
 
-        System.out.println("---->>>> " + customer.getTckn());
+        smsClient.sendSms(loanApplicationResult);
+
+        redirectAttributes.addAttribute("customerId", customer.getId());
 
         return "redirect:/customers/loanApplicationResultList";
 
@@ -125,9 +129,15 @@ public class WebController {
 
         loanApplicationClient.applyCustomerForLoan(customer.getTckn());
 
-        redirectAttributes.addAttribute("customerId", customerId);
+        LoanApplicationResult loanApplicationResult = loanApplicationClient.getLastLoanApplicationResultOfCustomerByTckn(customer.getTckn()).getBody();
 
-        System.out.println("---->>>> " + customer.getTckn());
+        System.out.println("I'm gonna blow");
+
+        smsClient.sendSms(loanApplicationResult);
+
+        System.out.println("I blew up!");
+
+        redirectAttributes.addAttribute("customerId", customerId);
 
         return "redirect:/customers/loanApplicationResultList";
 

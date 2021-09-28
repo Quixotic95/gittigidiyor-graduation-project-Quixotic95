@@ -11,13 +11,19 @@ import java.time.ZoneId;
 @Setter
 public class LoanApplicationResult {
 
-    private Double creditLimit;
+    private String customerFirstName;
+
+    private String customerLastName;
+
+    private String customerPhoneNumber;
 
     private Double customerMonthlyIncome;
 
-    private Boolean approved;
-
     private Instant createdDate;
+
+    private Double creditLimit;
+
+    private Boolean approved;
 
     private String applicationDate;
 

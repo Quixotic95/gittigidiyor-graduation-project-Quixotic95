@@ -11,4 +11,6 @@ public interface LoanApplicationService extends GenericService<LoanApplicationRe
 
     List<LoanApplicationResultDTO> findLoanApplications(String tckn);
 
+    LoanApplicationResultDTO findLastLoanApplicationResultOfCustomerByTckn(String tckn);
+
 }

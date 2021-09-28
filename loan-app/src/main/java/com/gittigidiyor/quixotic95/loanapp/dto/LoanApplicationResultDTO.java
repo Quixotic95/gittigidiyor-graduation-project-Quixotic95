@@ -9,12 +9,18 @@ import java.time.Instant;
 @Setter
 public class LoanApplicationResultDTO {
 
-    private Double creditLimit;
+    private String customerFirstName;
+
+    private String customerLastName;
+
+    private String customerPhoneNumber;
 
     private Double customerMonthlyIncome;
 
-    private Boolean approved;
-
     private Instant createdDate;
+
+    private Double creditLimit;
+
+    private Boolean approved;
 
 }

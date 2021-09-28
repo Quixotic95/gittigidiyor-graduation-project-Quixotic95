@@ -92,7 +92,18 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${io.springfox.version}</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>cz.jirutka.spring</groupId>
+            <artifactId>embedmongo-spring</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        -->
     </dependencies>
 
     <build>
