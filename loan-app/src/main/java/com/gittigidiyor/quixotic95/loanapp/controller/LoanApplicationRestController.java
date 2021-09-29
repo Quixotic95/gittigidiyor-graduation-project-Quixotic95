@@ -22,31 +22,40 @@ public class LoanApplicationRestController {
     private final LoanApplicationService loanApplicationService;
 
     @PostMapping("{tckn}")
-    public ResponseEntity<?> applyCustomerForLoan(@PathVariable(name = "tckn")
+    public ResponseEntity<?> applyCustomerForLoanByTckn(@PathVariable(name = "tckn")
                                                   @NotBlank
                                                   @Pattern(regexp = "^[1-9][0-9]{9}[02468]$", message = "TCKN can not start with 0, can not end with odd number and must contain 11 numbers!")
                                                           String tckn) {
-        log.info("inside LoanApplicationRestController applyCustomerForLoan");
-        LoanApplicationResultDTO result = loanApplicationService.applyForLoan(tckn);
+
+        log.info("inside LoanApplicationRestController applyCustomerForLoanByTckn");
+        log.info("tckn: " + tckn);
+
+        LoanApplicationResultDTO result = loanApplicationService.applyForLoanByTckn(tckn);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("{tckn}")
-    public ResponseEntity<?> getCustomerLoanApplicationResult(@PathVariable(name = "tckn")
+    public ResponseEntity<?> getCustomerLoanApplicationResultsByTckn(@PathVariable(name = "tckn")
                                                               @NotBlank
                                                               @Pattern(regexp = "^[1-9][0-9]{9}[02468]$", message = "TCKN can not start with 0, can not end with odd number and must contain 11 numbers!")
                                                                       String tckn) {
-        log.info("inside LoanApplicationRestController getCustomerLoanApplicationResult");
-        List<LoanApplicationResultDTO> result = loanApplicationService.findLoanApplications(tckn);
+
+        log.info("inside LoanApplicationRestController getCustomerLoanApplicationResultsByTckn");
+        log.info("tckn: " + tckn);
+
+        List<LoanApplicationResultDTO> result = loanApplicationService.findLoanApplicationsByTckn(tckn);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("getLast/{tckn}")
     public ResponseEntity<?> getLastLoanApplicationResultOfCustomerByTckn(@PathVariable(name = "tckn")
-                                                                      @NotBlank
-                                                                      @Pattern(regexp = "^[1-9][0-9]{9}[02468]$", message = "TCKN can not start with 0, can not end with odd number and must contain 11 numbers!")
-                                                                              String tckn) {
+                                                                          @NotBlank
+                                                                          @Pattern(regexp = "^[1-9][0-9]{9}[02468]$", message = "TCKN can not start with 0, can not end with odd number and must contain 11 numbers!")
+                                                                                  String tckn) {
+
         log.info("inside LoanApplicationRestController getLastLoanApplicationResultOfCustomerByTckn");
+        log.info("tckn: " + tckn);
+
         LoanApplicationResultDTO result = loanApplicationService.findLastLoanApplicationResultOfCustomerByTckn(tckn);
         return ResponseEntity.ok(result);
     }

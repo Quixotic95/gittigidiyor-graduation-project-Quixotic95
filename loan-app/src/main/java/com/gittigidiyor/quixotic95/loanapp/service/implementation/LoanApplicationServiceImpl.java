@@ -4,13 +4,11 @@ import com.gittigidiyor.quixotic95.loanapp.dto.LoanApplicationResultDTO;
 import com.gittigidiyor.quixotic95.loanapp.entity.LoanApplicationResult;
 import com.gittigidiyor.quixotic95.loanapp.entity.CreditScore;
 import com.gittigidiyor.quixotic95.loanapp.entity.Customer;
-import com.gittigidiyor.quixotic95.loanapp.entity.Sms;
 import com.gittigidiyor.quixotic95.loanapp.exception.LoanApplicationAlreadyExistsWithMonthlyIncomeForCustomerException;
 import com.gittigidiyor.quixotic95.loanapp.mapper.LoanApplicationResultMapper;
 import com.gittigidiyor.quixotic95.loanapp.repository.LoanApplicationRepository;
 import com.gittigidiyor.quixotic95.loanapp.repository.CreditScoreRepository;
 import com.gittigidiyor.quixotic95.loanapp.repository.CustomerRepository;
-import com.gittigidiyor.quixotic95.loanapp.repository.SmsRepository;
 import com.gittigidiyor.quixotic95.loanapp.service.LoanApplicationService;
 import com.gittigidiyor.quixotic95.loanapp.utility.LoanLimitCalculator;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,9 +33,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Transactional
     @Override
-    public LoanApplicationResultDTO applyForLoan(String tckn) {
+    public LoanApplicationResultDTO applyForLoanByTckn(String tckn) {
 
-        log.info("inside LoanApplicationServiceImpl applyForLoan");
+        log.info("inside LoanApplicationServiceImpl applyForLoanByTckn");
+        log.info("tckn: " + tckn);
 
         Customer foundCustomer = customerRepository.findCustomerByTckn(tckn)
                 .orElseThrow(() -> new EntityNotFoundException("Customer with TCKN: " + tckn + " couldn't found!"));
@@ -75,9 +73,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     }
 
     @Override
-    public List<LoanApplicationResultDTO> findLoanApplications(String tckn) {
+    public List<LoanApplicationResultDTO> findLoanApplicationsByTckn(String tckn) {
 
-        log.info("inside LoanApplicationServiceImpl findLoanApplications");
+        log.info("inside LoanApplicationServiceImpl findLoanApplicationsByTckn");
+        log.info("tckn: " + tckn);
 
         List<LoanApplicationResult> loanApplicationResults = loanApplicationRepository.findLoanApplicationResultsByCustomerTckn(tckn)
                 .orElseThrow(() -> new EntityNotFoundException("Loan Application for customer with TCKN: " + tckn + " could not be found!"));
@@ -92,6 +91,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     public LoanApplicationResultDTO findLastLoanApplicationResultOfCustomerByTckn(String tckn) {
 
         log.info("inside LoanApplicationServiceImpl findLastLoanApplicationResultOfCustomerByTckn");
+        log.info("tckn: " + tckn);
 
         LoanApplicationResult loanApplicationResult = loanApplicationRepository.findTopLoanApplicationResultByCustomerTcknOrderByCreatedDateDesc(tckn)
                 .orElseThrow(() -> new EntityNotFoundException("An error occurred while trying to get last loan application!"));

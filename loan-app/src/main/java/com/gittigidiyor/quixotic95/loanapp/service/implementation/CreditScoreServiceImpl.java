@@ -7,23 +7,26 @@ import com.gittigidiyor.quixotic95.loanapp.repository.CreditScoreRepository;
 import com.gittigidiyor.quixotic95.loanapp.service.CreditScoreService;
 import com.gittigidiyor.quixotic95.loanapp.utility.CreditScoreGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
-
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class CreditScoreServiceImpl implements CreditScoreService {
 
     private final CreditScoreRepository creditScoreRepository;
 
     @Transactional
     @Override
-    public CreditScoreDTO generateCreditScore(String tckn) {
+    public CreditScoreDTO generateCreditScoreByTckn(String tckn) {
+
+        log.info("inside CreditScoreServiceImpl generateCreditScoreByTckn");
+        log.info("tckn: " + tckn);
 
         Optional<CreditScore> foundCreditScore = creditScoreRepository.findCreditScoreByCustomerTckn(tckn);
         if (foundCreditScore.isPresent()) {

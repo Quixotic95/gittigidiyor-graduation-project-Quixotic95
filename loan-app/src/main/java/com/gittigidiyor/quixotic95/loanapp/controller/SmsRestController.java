@@ -20,6 +20,7 @@ public class SmsRestController {
     public ResponseEntity<?> sendSms(@RequestBody LoanApplicationResult loanApplicationResult) {
 
         log.info("inside SmsRestController sendSms");
+        log.info("loanApplicationResult: " + loanApplicationResult.toString());
 
         Sms result = smsService.sendSms(loanApplicationResult);
         return ResponseEntity.ok(result);

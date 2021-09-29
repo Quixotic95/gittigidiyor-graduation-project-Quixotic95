@@ -21,8 +21,7 @@ public class SmsServiceImpl implements SmsService {
     public Sms sendSms(LoanApplicationResult loanApplicationResult) {
 
         log.info("inside SmsServiceImpl sendSms");
-
-        log.info(loanApplicationResult.toString());
+        log.info("loanApplicationResult: " + loanApplicationResult.toString());
 
         Sms sms = new Sms(loanApplicationResult.getCustomerFirstName(),
                 loanApplicationResult.getCustomerLastName(),

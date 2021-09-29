@@ -108,7 +108,7 @@ public class WebController {
             return "web/loan-application-form";
         }
 
-        loanApplicationClient.applyCustomerForLoan(tcknModel.getTckn());
+        loanApplicationClient.applyCustomerForLoanByTckn(tcknModel.getTckn());
 
         Customer customer = customerClient.findCustomerByTckn(tcknModel.getTckn()).getBody();
 
@@ -116,6 +116,7 @@ public class WebController {
 
         smsClient.sendSms(loanApplicationResult);
 
+        assert customer != null;
         redirectAttributes.addAttribute("customerId", customer.getId());
 
         return "redirect:/customers/loanApplicationResultList";
@@ -127,15 +128,12 @@ public class WebController {
 
         Customer customer = customerClient.findCustomerById(customerId).getBody();
 
-        loanApplicationClient.applyCustomerForLoan(customer.getTckn());
+        assert customer != null;
+        loanApplicationClient.applyCustomerForLoanByTckn(customer.getTckn());
 
         LoanApplicationResult loanApplicationResult = loanApplicationClient.getLastLoanApplicationResultOfCustomerByTckn(customer.getTckn()).getBody();
 
-        System.out.println("I'm gonna blow");
-
         smsClient.sendSms(loanApplicationResult);
-
-        System.out.println("I blew up!");
 
         redirectAttributes.addAttribute("customerId", customerId);
 
@@ -163,9 +161,8 @@ public class WebController {
 
         Customer customer = customerClient.findCustomerByTckn(tcknModel.getTckn()).getBody();
 
+        assert customer != null;
         redirectAttributes.addAttribute("customerId", customer.getId());
-
-        System.out.println("---->>>> " + customer.getTckn());
 
         return "redirect:/customers/loanApplicationResultList";
 
@@ -177,7 +174,8 @@ public class WebController {
 
         Customer customer = customerClient.findCustomerById(customerId).getBody();
 
-        List<LoanApplicationResult> applicationResults = loanApplicationClient.getCustomerLoanApplicationResults(customer.getTckn()).getBody();
+        assert customer != null;
+        List<LoanApplicationResult> applicationResults = loanApplicationClient.getCustomerLoanApplicationResultsByTckn(customer.getTckn()).getBody();
 
         model.addAttribute("applicationResults", applicationResults);
         model.addAttribute("customer", customer);

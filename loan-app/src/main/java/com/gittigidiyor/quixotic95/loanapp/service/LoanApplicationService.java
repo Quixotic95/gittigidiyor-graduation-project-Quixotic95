@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface LoanApplicationService extends GenericService<LoanApplicationResultDTO> {
 
-    LoanApplicationResultDTO applyForLoan(String tckn);
+    LoanApplicationResultDTO applyForLoanByTckn(String tckn);
 
-    List<LoanApplicationResultDTO> findLoanApplications(String tckn);
+    List<LoanApplicationResultDTO> findLoanApplicationsByTckn(String tckn);
 
     LoanApplicationResultDTO findLastLoanApplicationResultOfCustomerByTckn(String tckn);
 

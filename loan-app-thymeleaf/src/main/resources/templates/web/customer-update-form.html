@@ -63,7 +63,7 @@
 
         <label for="phoneNumber">Phone Number</label>
         <input type="number" th:field="*{phoneNumber}"
-               class="form-control mb-4 col-4" placeholder="5413711566" id="phoneNumber"/>
+               class="form-control mb-4 col-4" placeholder="05413711566" id="phoneNumber"/>
         <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"
            class="alert alert-danger col-md-4 rounded-pill font-weight-light p-2" role="alert"
            style="font-size:60%;"></p>

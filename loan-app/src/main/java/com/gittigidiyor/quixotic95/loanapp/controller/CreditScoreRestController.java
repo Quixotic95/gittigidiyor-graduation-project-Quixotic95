@@ -3,6 +3,7 @@ package com.gittigidiyor.quixotic95.loanapp.controller;
 import com.gittigidiyor.quixotic95.loanapp.dto.CreditScoreDTO;
 import com.gittigidiyor.quixotic95.loanapp.service.CreditScoreService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Pattern;
 @RequestMapping("api/creditScores")
 @Validated
 @RequiredArgsConstructor
+@Slf4j
 public class CreditScoreRestController {
 
     private final CreditScoreService creditScoreService;
@@ -27,7 +29,10 @@ public class CreditScoreRestController {
                                                        @Pattern(regexp = "^[1-9][0-9]{9}[02468]$", message = "TCKN can not start with 0, can not end with odd number and must contain 11 numbers!")
                                                                String tckn) {
 
-        CreditScoreDTO result = creditScoreService.generateCreditScore(tckn);
+        log.info("inside CreditScoreRestController generateCreditScoreByTckn");
+        log.info("tckn: " + tckn);
+
+        CreditScoreDTO result = creditScoreService.generateCreditScoreByTckn(tckn);
 
         return ResponseEntity.ok(result);
 

@@ -13,10 +13,10 @@ import java.util.List;
 public interface LoanApplicationClient {
 
     @PostMapping("{tckn}")
-    ResponseEntity<LoanApplicationResult> applyCustomerForLoan(@PathVariable(name = "tckn") String tckn);
+    ResponseEntity<LoanApplicationResult> applyCustomerForLoanByTckn(@PathVariable(name = "tckn") String tckn);
 
     @GetMapping("{tckn}")
-    ResponseEntity<List<LoanApplicationResult>> getCustomerLoanApplicationResults(@PathVariable(name = "tckn") String tckn);
+    ResponseEntity<List<LoanApplicationResult>> getCustomerLoanApplicationResultsByTckn(@PathVariable(name = "tckn") String tckn);
 
     @GetMapping("getLast/{tckn}")
     ResponseEntity<LoanApplicationResult> getLastLoanApplicationResultOfCustomerByTckn(@PathVariable(name = "tckn") String tckn);
