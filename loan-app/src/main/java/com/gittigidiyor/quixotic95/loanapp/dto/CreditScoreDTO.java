@@ -1,10 +1,8 @@
 package com.gittigidiyor.quixotic95.loanapp.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class CreditScoreDTO {
 
     private Double creditScore;

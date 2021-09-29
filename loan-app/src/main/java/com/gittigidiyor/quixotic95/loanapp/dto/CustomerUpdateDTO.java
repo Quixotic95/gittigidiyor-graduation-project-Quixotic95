@@ -3,8 +3,7 @@ package com.gittigidiyor.quixotic95.loanapp.dto;
 import com.gittigidiyor.quixotic95.loanapp.validation.group.FirstCheck;
 import com.gittigidiyor.quixotic95.loanapp.validation.group.SecondCheck;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
@@ -12,8 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 public class CustomerUpdateDTO {
 
     @ApiModelProperty(hidden = true)
