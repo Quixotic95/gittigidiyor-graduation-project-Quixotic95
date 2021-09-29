@@ -2,9 +2,9 @@
 
 ## Summary
 
-A Loan Application System developed with Spring Boot and uses Restful. Receives __*loan application requests*__ and returns
-the __*loan application result*__ according to the __*customer info*__ and __*credit score*__ of the customer. Also sends a __*sms*__ to the
-customer about loan application result.
+A Loan Application System developed with Spring Boot and uses Restful. Receives __*loan application requests*__ and
+returns the __*loan application result*__ according to the __*customer info*__ and __*credit score*__ of the customer.
+Also sends a __*sms*__ to the customer about loan application result.
 
 ## Details
 
@@ -89,18 +89,24 @@ mvn spring-boot:run
 
 Go to: http://localhost:8081 from your browser.
 
+![frontend](img/frontend.png)
+
 Feel free to use :)!
 
 ### Detailed Usage
 
 * http://localhost:8080/swagger-ui.html to see list of all endpoints & sending requests.
 
-* http://localhost:8080/h2-console/ for embedded H2 relational database that saves _**Customers, Credit Scores, Loan
+![Swagger UI](img/Swagger_UI.png)
+
+* http://localhost:8080/h2-console/ for embedded H2 relational database that holds _**Customers, Credit Scores, Loan
   Application Results**_ and _**Exception Logs**_ .
     * Driver Class: org.h2.Driver
     * JDBC URL: jdbc:h2:mem:userdb
     * User Name: sa
     * Password:
+
+![H2 Database](img/H2_Database.png)
 
 * MongoDB Compass to see sent _**Sms**_ logging.
     * Hostname: localhost
@@ -108,13 +114,17 @@ Feel free to use :)!
     * db: sms
     * collection: sms
 * If you don't have MongoDB Compass, to see sms db collections just follow:
-    * Go to location where mongo DB is installed “C:\Program Files\MongoDB\Server\ {version} \bin” and open PowerShell at that location. And execute these commands:
+    * Go to location where mongo DB is installed “C:\Program Files\MongoDB\Server\ {version} \bin” and open PowerShell
+      at that location. And execute these commands:
+
 ```batch
 .\mongo.exe
 ```
+
 ```batch
 use sms
 ```
+
 ```batch
 db.sms.find({})
 ```
