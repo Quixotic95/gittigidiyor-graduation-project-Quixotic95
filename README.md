@@ -2,20 +2,22 @@
 
 ## Summary
 
-A Loan Application System developed with Spring Boot and uses Restful. Receives Loan Application requests and returns
-the Loan Application Result according to the Customer info and Credit Score of the Customer. Also sends a sms to the
-Customer about Loan Application Result.
+A Loan Application System developed with Spring Boot and uses Restful. Receives __*loan application requests*__ and returns
+the __*loan application result*__ according to the __*customer info*__ and __*credit score*__ of the customer. Also sends a __*sms*__ to the
+customer about loan application result.
 
 ## Details
 
 * A system that user can *add*, *update*, *delete* **Customer**.
 
-* When a **Customer** is added to the system, a **Credit Score** will generated automatically according to the last
+* When a **Customer** is added to the system, a **Credit Score** will be generated automatically according to the last
   digit of tckn.
 
 * User can *apply for loan* for **Customer**.
 
 * **Loan application result** will be calculated depending on **Credit Score** and **Customer's monthly income**.
+
+* **Loan application results** can be *inquired* by tckn of the **Customer**
 
 * **Loan application result** will be sent to Customer's phone number.
 
@@ -25,7 +27,7 @@ Customer about Loan Application Result.
 * **git** *Installed*
 * **Apache Maven** *Installed*
 * **MongoDB** *Installed and Running*
-* ```Optional``` **MongoDB Compass** *Installed and Running* for
+* ```Optional``` **MongoDB Compass** *Installed and Running* for checking sent sms logs.
 
 ## Used Technologies
 
