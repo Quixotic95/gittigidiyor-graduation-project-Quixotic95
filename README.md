@@ -69,7 +69,7 @@ cd .\loan-app\
 mvn spring-boot:run
 ```
 
-*Let the bash(cmd, powershell, git bash, etc.) run spring boot application.*
+*Let the bash(cmd, powershell, git bash, etc.) run spring boot application.* And **do not close** it.
 
 ##### Then, run the frontend.
 
@@ -81,7 +81,7 @@ cd .\loan-app-thymeleaf\
 mvn spring-boot:run
 ```
 
-*Let the bash(cmd, powershell, git bash, etc.) run spring boot application.*
+*Let the bash(cmd, powershell, git bash, etc.) run spring boot application.* And **do not close** it.
 
 ## Usage
 
@@ -131,7 +131,7 @@ db.sms.find({})
 
 ### Whenever you want to terminate the application completely
 
-Just simply press Ctrl + C on the all running bash windows.
+Just simply press Ctrl + C on the all running bash windows. Sometimes you need to press multiple times until the output "^C" is shown.
 
 
 
