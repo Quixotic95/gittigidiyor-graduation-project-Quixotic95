@@ -54,7 +54,7 @@ cd .\gittigidiyor-graduation-project-Quixotic95\
 
 ### Since the project consists of two modules:
 
-#### You need to run 2 different bash.
+#### You need to run 2 bash windows at the same time.
 
 * One for **loan-app (api backend)**
 * One for **loan-app-thymeleaf (frontend)**
@@ -93,7 +93,7 @@ Feel free to use :)!
 
 ### Detailed Usage
 
-* http://localhost:8080/swagger-ui.html for see the all endpoints & sending requests.
+* http://localhost:8080/swagger-ui.html to see list of all endpoints & sending requests.
 
 * http://localhost:8080/h2-console/ for embedded H2 relational database that saves _**Customers, Credit Scores, Loan
   Application Results**_ and _**Exception Logs**_ .
@@ -102,13 +102,13 @@ Feel free to use :)!
     * User Name: sa
     * Password:
 
-* MongoDB Compass for saving sent _**Sms**_ logging.
+* MongoDB Compass to see sent _**Sms**_ logging.
     * Hostname: localhost
     * Port: 27017
     * db: sms
     * collection: sms
-* If you don't have MongoDB Compass, for seeing sms db collections just follow:
-    * Go to location where mongo DB is installed “C:\Program Files\MongoDB\Server\ ~version~ \bin” and open PowerShell at that location. And execute these commands:
+* If you don't have MongoDB Compass, to see sms db collections just follow:
+    * Go to location where mongo DB is installed “C:\Program Files\MongoDB\Server\ {version} \bin” and open PowerShell at that location. And execute these commands:
 ```batch
 .\mongo.exe
 ```
